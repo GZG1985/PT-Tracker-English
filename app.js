@@ -174,8 +174,10 @@ async function refresh() {
 
 function showForm(show) {
   $("form-panel").hidden = !show;
+  // Start with an empty form for every client. Never inherit a previous package size.
+  $("client-form").reset();
+  $("session-count").value = "";
   if (show) $("first-name").focus();
-  else $("client-form").reset();
 }
 
 function validClient(input) {
@@ -241,7 +243,13 @@ async function main() {
     event.preventDefault();
     const firstName = $("first-name").value.trim();
     const lastName = $("last-name").value.trim();
-    const sessions = Number($("session-count").value);
+    const sessionEntry = $("session-count").value.trim();
+    if (sessionEntry === "") {
+      alert("Enter the starting number of sessions for this client.");
+      $("session-count").focus();
+      return;
+    }
+    const sessions = Number(sessionEntry);
     const client = {
       id: crypto.randomUUID(), firstName, lastName, sessions,
       createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()

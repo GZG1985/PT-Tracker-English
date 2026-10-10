@@ -1,5 +1,5 @@
 // Change the version whenever you publish updated app files.
-const CACHE_NAME = "personal-training-tracker-20261010-v2-en-responsive";
+const CACHE_NAME = "personal-training-tracker-20261010-v3-individual-session-start";
 const OFFLINE_FILES = [
   "./", "./index.html", "./styles.css", "./app.js", "./manifest.webmanifest",
   "./icons/icon-192.png", "./icons/icon-512.png", "./icons/apple-touch-icon.png"
