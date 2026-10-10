@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#254c43">
+  <meta name="description" content="A simple, offline tracker for personal training sessions.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="PT Tracker">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Personal Training Tracker</title>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="header">
+      <div>
+        <p class="eyebrow">PERSONAL TRAINING</p>
+        <h1>My Clients</h1>
+        <p class="subtitle">Keep track of every session.</p>
+      </div>
+      <button id="add-button" class="button button-primary add-button" type="button"><span aria-hidden="true">＋</span> New</button>
+    </header>
+
+    <main>
+      <section id="form-panel" class="panel form-panel" hidden aria-label="Add a new client">
+        <h2>New Client</h2>
+        <form id="client-form">
+          <div class="field-row">
+            <label>First name
+              <input id="first-name" name="first-name" type="text" autocomplete="off" maxlength="100" required placeholder="e.g. Lisa">
+            </label>
+            <label>Last name
+              <input id="last-name" name="last-name" type="text" autocomplete="off" maxlength="100" required placeholder="e.g. Smith">
+            </label>
+          </div>
+          <label>Number of sessions
+            <input id="session-count" name="session-count" type="number" min="0" max="100000" step="1" required inputmode="numeric" value="10">
+          </label>
+          <div class="form-actions">
+            <button id="cancel-button" class="button button-outline" type="button">Cancel</button>
+            <button class="button button-primary" type="submit">Save client</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="summary" aria-label="Summary">
+        <div class="stat">
+          <span id="clients-count" class="stat-value">0</span>
+          <span class="stat-label">clients</span>
+        </div>
+        <div class="stat">
+          <span id="sessions-total" class="stat-value">0</span>
+          <span class="stat-label">sessions remaining</span>
+        </div>
+      </section>
+
+      <section class="clients-section" aria-label="Client list">
+        <label class="search-label" for="search-input">Find a client</label>
+        <input id="search-input" class="search-input" type="search" placeholder="Search first or last name..." autocomplete="off">
+        <div id="client-list" class="client-list" aria-live="off"></div>
+        <p id="empty-message" class="empty-message">No clients yet. Tap “New” to add your first client.</p>
+      </section>
+
+      <section class="panel backup-panel" aria-label="Backups">
+        <h2>My Data</h2>
+        <p>Client details stay on this device only. Create regular backups so you can restore them if needed.</p>
+        <div class="backup-actions">
+          <button id="export-button" type="button" class="button button-outline">↓ Save backup</button>
+          <button id="import-button" type="button" class="button button-outline">↑ Restore backup</button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden>
+        </div>
+        <p class="help-text">Keep your backup file somewhere secure. Anyone with access to it can read the client names and session counts.</p>
+      </section>
+    </main>
+
+    <footer><small>No account · No syncing · Data stored on this device</small></footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>
